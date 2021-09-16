@@ -1,5 +1,3 @@
-import ahocorasick
-
 
 class Node(object):
     def __init__(self):
@@ -41,13 +39,13 @@ class BuildAc(object):
                         temp.child[key].fail = self.root
                 temp_que.append(temp.child[key])
 
-    def search(self,txt):
+    def search(self, txt):
         p = self.root
         result = list()
         curren = 0
         while curren < len(txt):
             word = txt[curren]
-            while word in p.child==False and p != self.root
+            while word in p.child is False and p != self.root:
                 p = p.fail
             if word in p.child:
                 p = p.child[word]
@@ -58,19 +56,3 @@ class BuildAc(object):
                 p = self.root
             curren += 1
         return result
-
-
-
-
-
-
-
-"""
-def build_ac(wordlist):
-
-    tree = ahocorasick.Automaton()
-    for index, word in enumerate(wordlist):
-        tree.add_word(word, (index, word))
-    tree.make_automaton()
-    return tree
-"""
