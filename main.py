@@ -33,7 +33,7 @@ if __name__ == '__main__':
         answer3[i] = answer2[i]
     for i in sorted(answer3):
         answer[i] = answer3[i]
-        with open('C:/Users/86189/AppData/Local/Programs/Python/答案文件.txt', 'w') as f:
+        with open('C:/Users/86189/AppData/Local/Programs/Python/ans.txt', 'w') as f:
             txt_str = json.dumps(answer, indent=0)
             f.write(txt_str)
             f.write('\n')
