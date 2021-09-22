@@ -1,0 +1,39 @@
+import itertools
+#from radical_splitting import *
+from get_initial import *
+from get_Pinyin import *
+
+
+class Combination(object):
+
+    def __init__(self):
+        self.data_list = list()
+        self.lastlist = list()
+        self.strlist = list()
+
+    def add_data(self, data):
+        self.data_list.append(data)
+
+    def build(self):
+        for i in itertools.product(*self.data_list):
+            self.lastlist.append(list(i))
+
+
+def sensitive_word(word_s):
+
+    wordlist = Combination()
+    initial = list(get_initial(word))
+    pinyin = get_pinyin(list(word))
+    for i in range(len(word)):
+        list1 = list()
+        list1.append(initial[i])
+        list1.append(pinyin[i])
+        wordlist.add_data(list1)
+    #radical = radical_splitting(word)
+    wordlist.build()
+    for i in wordlist.lastlist:
+        new_str = ''.join([str(x) for x in i])
+        wordlist.strlist.append(new_str)
+    dict_sensitive = dict()
+    dict_sensitive[word_s] = wordlist.strlist
+    return dict_sensitive
