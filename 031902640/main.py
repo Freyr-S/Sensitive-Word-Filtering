@@ -56,12 +56,12 @@ if __name__ == '__main__':
     with open(org_file, 'r', encoding='utf-8') as f:
         txt1 = f.read().splitlines()
     for i in range(len(txt1)):
-        pinyin_list = get_pinyin(txt1)
+        pinyin_list = get_pinyin(txt1[i])
         pinyin_txt = ''
         for ii in pinyin_list:
             pinyin_txt = ''.join(pinyin_list)
         count = int(i) + 1
-        answer.update({count: tree.search(pinyin_txt.lower(), pinyin_list, list(txt1))})
+        answer.update({count: tree.search(pinyin_txt.lower(), pinyin_list, list(txt1[i]))})
     sum = 0
     for i in answer.values():
         for ii in i:
