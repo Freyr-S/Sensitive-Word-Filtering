@@ -61,9 +61,7 @@ class BuildAc(object):
                 temp_que.append(temp.child[key])
 
     def search(self, txt, txt_list, txt_o):
-        print(txt)
-        print(txt_list)
-        print(list(txt_o))
+
         p = self.root
         result = list()
         i = 0
