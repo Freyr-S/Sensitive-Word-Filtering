@@ -22,9 +22,9 @@ class Combination(object):
 def sensitive_word(word_s):
 
     wordlist = Combination()
-    initial = list(get_initial(word))
-    pinyin = get_pinyin(list(word))
-    for i in range(len(word)):
+    initial = list(get_initial(word_s))
+    pinyin = get_pinyin(list(word_s))
+    for i in range(len(word_s)):
         list1 = list()
         list1.append(initial[i])
         list1.append(pinyin[i])
