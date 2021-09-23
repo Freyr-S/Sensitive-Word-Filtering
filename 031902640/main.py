@@ -1,7 +1,25 @@
-from build_ac import *
 from sensitive_word import *
-from get_Pinyin import *
 import sys
+from build_ac import *
+import pypinyin
+
+
+def get_pinyin(wordlist):
+
+    list_pinyin = list()
+    gap = ''
+    for words in wordlist:
+        piny = gap.join(pypinyin.lazy_pinyin(words))
+        list_pinyin.append(piny)
+    return list(list_pinyin)
+
+
+def get_initial(word_i):
+
+    gap = ''
+    initial = gap.join(i[0][0] for i in pypinyin.lazy_pinyin(word_i))
+    return initial
+
 
 
 def is_english(check_str):
@@ -37,12 +55,13 @@ if __name__ == '__main__':
     filet = open(org_file, 'r+', encoding='utf-8')
     with open(org_file, 'r', encoding='utf-8') as f:
         txt1 = f.read().splitlines()
-    for i in txt1:
+    for i in range(len(txt1)):
         pinyin_list = get_pinyin(txt1)
         pinyin_txt = ''
-        for i in pinyin_list:
+        for ii in pinyin_list:
             pinyin_txt = ''.join(pinyin_list)
-        answer.update({list.index(i): tree.search(pinyin_txt.lower(), pinyin_list, list(txt1))})
+        count = int(i) + 1
+        answer.update({count: tree.search(pinyin_txt.lower(), pinyin_list, list(txt1))})
     sum = 0
     for i in answer.values():
         for ii in i:
