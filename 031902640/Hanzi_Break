@@ -681,13 +681,3 @@ def break_hanzi(w_list):
     else:
         print(b_list)
         return b_list
-
-
-if __name__ == '__main__':
-    word = '你好'
-    a = list(word)
-    b = break_hanzi(a)
-    e = []
-    new_str = ''.join(b)
-    e.append(new_str)
-    print(e)
