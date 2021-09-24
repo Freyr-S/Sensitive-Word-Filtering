@@ -106,7 +106,7 @@ if __name__ == '__main__':
     for i in answer.values():
         for ii in i:
             sum += 1
-    filea = open(ans_file)
+    filea = open(ans_file, 'w+', encoding='utf-8')
     filea.write('Total: {}'.format(sum)+'\n')
     for key, value in answer.items():
         for i in value:
