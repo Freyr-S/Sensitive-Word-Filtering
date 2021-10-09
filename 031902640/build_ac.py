@@ -107,11 +107,6 @@ class BuildAc(object):
                             continue
                 while word_se in p.child is False and p != self.root:
                     p = p.fail
-                #if(flag2 == True and word_se not in p.child):
-                 #   flag2 = False
-                 #   i = 0
-                 #   length = 0
-                 #   continue
                 if word_se in p.child:
                     flag4 = True
                     p = p.child[word_se]
@@ -122,16 +117,6 @@ class BuildAc(object):
                         flag3 = True
                     if is_english(txt_o[j]):
                         templist.append(txt_o[j])
-                    #if curren < len(txt)-1:
-                     #   if (txt[curren+1] not in p.child):
-                     #       flag2 = False
-                     #       i = 0
-                    #        length = 0
-                    #if is_english(txt_o[j]):
-                     #   length += 1
-                    #elif ~(is_english(txt_o[j])):
-                     #   if cnt == len(txt_list[j]) - 1:#0:
-                     #       length += 1
                 else:
                     #if flag5 is True:
                         #result.append([p.word, str_o])
@@ -147,13 +132,6 @@ class BuildAc(object):
                         p = self.root
                     p = self.root
                 if p.isWord:
-                    #if p.child:
-                     #   flag5 = True
-                     #   str_o = ''
-                     #   for z in templist:
-                      #      str_o = ''.join(templist)
-                       # ttemplist.append(templist)
-                      #  continue
                     str_o = ''
                     for z in templist:
                         str_o = ''.join(templist)
