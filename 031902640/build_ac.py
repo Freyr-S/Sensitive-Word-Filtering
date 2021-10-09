@@ -16,6 +16,7 @@ class Node(object):
         self.child = dict()
         self.isWord = False
         self.word = ''
+        self.len = 0
 
 
 class BuildAc(object):
@@ -24,7 +25,7 @@ class BuildAc(object):
         self.meaningless = [' ', '|', '/', '&', '!', '！', '@', '.', ',', ':', ';', '"', "'", '{', '}', '\\', '-', '#',
                             '$', '￥', '*', '^', '%', '?', '？', '<', '>', '《', '》', '(', ')', '+', '~', '`', '1', '2', 
                             '3', '4', '5', '6', '7', '8', '9', '0', '[', ']', '【', '】', '…', '_', '（', '）', '—', '=',
-                            '{', '}', '、', '\'', '‘', '”', '：', '；']
+                            '{', '}', '、', '\'', '‘', '”', '：', '；', '\"', '。']
 
     def add_word(self, word):
         temp_root = self.root
@@ -64,55 +65,107 @@ class BuildAc(object):
     def search(self, txt, txt_list, txt_o):
 
         p = self.root
+        #q = self.root
         result = list()
         i = 0
         curren = -1
         length = 0
         flag1 = False
-        start = 0
-        end = 0
+        flag2 = False
+        flag3 = False
+        flag4 = False
+        #flag5 = False
+        templist = list()
+        ttemplist = list()
         for j in range(len(txt_list)):
-            for cnt in range(len(txt_list[j])):
+            cnt = -1
+            flag3 = False
+            #for cnt in range(len(txt_list[j])):
+            while(cnt < len(txt_list[j]) - 1):
+                cnt += 1
                 curren += 1
                 word_se = txt[curren]
                 if word_se in self.meaningless:
+                    if flag4 is True:
+                        i = 0
+                        flag4 = False
                     if flag1 is False:
                         continue
                     else:
                         i += 1
                         if flag1 is True and i <= 20:
+                            templist.append(word_se)
                             continue
                         elif flag1 is True and i > 20:
                             p = self.root
                             flag1 = False
+                            length = 0
                             i = 0
+                            flag2 = False
+                            flag3 = False
+                            templist.clear()
                             continue
                 while word_se in p.child is False and p != self.root:
                     p = p.fail
+                #if(flag2 == True and word_se not in p.child):
+                 #   flag2 = False
+                 #   i = 0
+                 #   length = 0
+                 #   continue
                 if word_se in p.child:
+                    flag4 = True
                     p = p.child[word_se]
                     flag1 = True
+                    flag2 = True
+                    if flag3 == False and is_english(txt_o[j]) is False:
+                        templist.append(txt_o[j])
+                        flag3 = True
                     if is_english(txt_o[j]):
-                        length += 1
-                    elif ~(is_english(txt_o[j])):
-                        if cnt == len(txt_list[j]) - 1:
-                            length += 1
+                        templist.append(txt_o[j])
+                    #if curren < len(txt)-1:
+                     #   if (txt[curren+1] not in p.child):
+                     #       flag2 = False
+                     #       i = 0
+                    #        length = 0
+                    #if is_english(txt_o[j]):
+                     #   length += 1
+                    #elif ~(is_english(txt_o[j])):
+                     #   if cnt == len(txt_list[j]) - 1:#0:
+                     #       length += 1
                 else:
+                    #if flag5 is True:
+                        #result.append([p.word, str_o])
+                        #flag5 = False
+                    if flag2 == True:
+                        flag4 = False
+                        flag3 = False
+                        flag2 = False
+                        flag1 = False
+                        templist.clear()
+                        cnt -= 1
+                        curren -= 1
+                        p = self.root
                     p = self.root
                 if p.isWord:
-                    if ~(is_english(txt_o[j])) and ~(cnt == len(txt_list[j]) - 1):
-                        length += 1
-                    if is_english(txt_o[j]):
-                        length -= 1
-                    end = j + 1
-                    start = end - i - length
+                    #if p.child:
+                     #   flag5 = True
+                     #   str_o = ''
+                     #   for z in templist:
+                      #      str_o = ''.join(templist)
+                       # ttemplist.append(templist)
+                      #  continue
                     str_o = ''
-                    for z in txt_o[start: end]:
-                        str_o = ''.join(txt_o[start: end])
+                    for z in templist:
+                        str_o = ''.join(templist)
                     result.append([p.word, str_o])
                     p = self.root
                     i = 0
                     flag1 = False
+                    flag2 = False
+                    flag3 = False
+                    flag4 = False
+                    flag5 = False
                     length = 0
+                    templist.clear()
 
         return result
