@@ -56,17 +56,18 @@ if __name__ == '__main__':
     with open(org_file, 'r', encoding='utf-8') as f:
         txt1 = f.read().splitlines()
     for i in range(len(txt1)):
-        pinyin_list = get_pinyin(txt1[i])
+        pinyin_list = get_pinyin(txt1[i].strip())
         pinyin_txt = ''
         for ii in pinyin_list:
             pinyin_txt = ''.join(pinyin_list)
         count = int(i) + 1
-        answer.update({count: tree.search(pinyin_txt.lower(), pinyin_list, list(txt1[i]))})
+        answer.update({count: tree.search(pinyin_txt.lower(), pinyin_list, list(txt1[i].strip()))})
     sum = 0
     for i in answer.values():
         for ii in i:
             sum += 1
     filea = open(ans_file, 'w+', encoding='utf-8')
+    print('Total: {}'.format(sum))
     filea.write('Total: {}'.format(sum)+'\n')
     for key, value in answer.items():
         for i in value:
